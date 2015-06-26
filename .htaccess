@@ -1,0 +1,22 @@
+SetEnv PHP_VER 5_3
+SetEnv REGISTER_GLOBALS 0
+<FilesMatch "^\.(ht)|\.(ini|phps|log|sh|bak|1|old|swp)$|(\*~)$">
+  Order Allow,Deny
+  Deny from all
+</FilesMatch>
+<Files favicon.icon>
+  Order allow,deny
+  Deny from all
+</Files>
+<Files .gitattributes>
+  Order allow,deny
+  Deny from all
+</Files>
+<Files .gitignore>
+  Order allow,deny
+  Deny from all
+</Files>
+<Files manifest.json>
+  Order allow,deny
+  Deny from all
+</Files>
