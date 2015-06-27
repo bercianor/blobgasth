@@ -252,7 +252,7 @@ try {
             $sql=$con->prepare("
                 CREATE TABLE IF NOT EXISTS " . $tableuser . " (
                     IdUser INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-                    User TEXT NOT NULL,
+                    User TEXT NOT NULL COLLATE NOCASE,
                     lang TEXT NOT NULL DEFAULT 'ES_es',
                     Cutoff INTEGER NOT NULL DEFAULT CURRENT_TIMESTAMP,
                     passhash TEXT NOT NULL,

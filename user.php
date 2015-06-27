@@ -31,7 +31,7 @@ try {
         echo "<script languaje='javascript'>window.open('index.php','_self');</script>";
     }
     if (isset($_POST['login'])) {
-        $sql=$con->prepare("SELECT * FROM ".$tableuser." WHERE lower(User) = lower(:user)");
+        $sql=$con->prepare("SELECT * FROM ".$tableuser." WHERE User = :user");
         $sql->bindParam(':user', test_input($_POST['user']));
         $sql->execute();
         $row = $sql->fetch(PDO::FETCH_ASSOC);
