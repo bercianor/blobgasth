@@ -53,6 +53,6 @@ password = pass
 
 TODO list
 ---------
-- [ ] Add posibility to modify movements.
+- [X] Add posibility to modify activities.
 - [ ] Add posibility to rearrange accounts or categories.
 - [ ] Add language selection (now only in spanish).

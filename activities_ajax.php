@@ -25,6 +25,7 @@
         <th>Externo</th>
         <th>Categoría</th>
         <th>Descripción</th>
+        <th></th>
     </tr>
 <?php
     $total = 0;
@@ -43,6 +44,7 @@
         echo "    <td align='left'>" . $row['External'] . "</td>";
         echo "    <td align='left'>" . $row['Category'] . "</td>";
         echo "    <td align='left'>" . $row['Description'] . "</td>";
+        echo "    <td align='center'><img id='" . $row['idActivity'] . "' class='editactivity' src='iconos/ic_mode_edit_black_48dp.png' width='15' height='15' alt='edit' /></td>";
         echo "</tr>";
         $total += $row['Value'];
     }
@@ -50,6 +52,7 @@
     echo "    <td>Total</td>";
     echo "    <td></td>";
     echo "    <td align='right'>" . round($total, 2) . " €</td>";
+    echo "    <td></td>";
     echo "    <td></td>";
     echo "    <td></td>";
     echo "    <td></td>";
@@ -65,6 +68,7 @@
         <th>Valor</th>
         <th>Cuenta Origen</th>
         <th>Cuenta Destino</th>
+        <th></th>
     </tr>
 <?php
     $transfers->execute();
@@ -79,7 +83,48 @@
         echo "    <td align='right'>" . $row['Value'] . " €</td>";
         echo "    <td align='left'>" . $row['OriginAccount'] . "</td>";
         echo "    <td align='left'>" . $row['DestAccount'] . "</td>";
+        echo "    <td align='center'><img id='" . $row['idTransfer'] . "' class='edittransfer' src='iconos/ic_mode_edit_black_48dp.png' width='15' height='15' alt='edit' /></td>";
         echo "</tr>";
     }
 ?>
 </table>
+<script>
+    $(".editactivity").click(function(){
+        var e = event.target.id;
+        $("#content").animate({
+            left: -$("#content").outerWidth()
+        }, "slow", "swing", function(){
+            $("#content").html("");
+            $.get("editact.php?id=" + e + "&type=activity", function(data, status){
+                if (status === "success") {
+                    $("#content").html(data);
+                    $("#content").animate({
+                        left: 0
+                    }, "slow", "swing");
+                }
+                else {
+                    $("#content").html("Error: " + status);
+                }
+            });
+        });
+    });
+    $(".edittransfer").click(function(){
+        var e = event.target.id;
+        $("#content").animate({
+            left: -$("#content").outerWidth()
+        }, "slow", "swing", function(){
+            $("#content").html("");
+            $.get("editact.php?id=" + e + "&type=transfer", function(data, status){
+                if (status === "success") {
+                    $("#content").html(data);
+                    $("#content").animate({
+                        left: 0
+                    }, "slow", "swing");
+                }
+                else {
+                    $("#content").html("Error: " + status);
+                }
+            });
+        });
+    });
+</script>

@@ -23,7 +23,8 @@ try {
         $tableactdatemonth="strftime('%Y%m', ".$tableact.".Date)";
     }
     $activities = $con->prepare("
-        SELECT 
+        SELECT
+            ".$tableact.".id AS idActivity,
             ".$tableact.".Date AS Date,
             ".$tableact.".Type AS Type,
             ROUND(".$tableact.".Value, 2) AS Value,
@@ -60,6 +61,7 @@ try {
     }
     $transfers = $con->prepare("
         SELECT 
+            ".$tabletrans.".id AS idTransfer,
             ".$tabletrans.".Date AS Date,
             ROUND(".$tabletrans.".Value, 2) AS Value,
             ".$tableaccounts."_orig.Account AS OriginAccount,

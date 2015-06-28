@@ -107,6 +107,67 @@ try{
         $sql->bindParam(':destaccount', test_input($_POST['destaccount']));
         $sql->execute();
     }
+    if (isset($_POST['editact'])) {
+        $sql=$con->prepare("SELECT * FROM ".$tableact." WHERE id = :id");
+        $sql->bindParam(':id', test_input($_GET['id']));
+        $sql->execute();
+        $oldact = $sql->fetch(PDO::FETCH_ASSOC);
+        (($oldact['Type'] == 'Expense' && test_input($_POST['value'])>0) ? ($op_value = -test_input($_POST['value'])) : ($op_value = test_input($_POST['value'])));
+        
+        $sql=$con->prepare("SELECT Common FROM ".$tableaccounts." WHERE IdAccount = :account");
+        $sql->bindParam(':account', test_input($_POST['account']));
+        $sql->execute();
+        $cuentacomun = $sql->fetch(PDO::FETCH_ASSOC);
+        
+        $sql=$con->prepare("UPDATE ".$tableact." SET IdUser = ".$oldact['IdUser'].", Date = '".date('Y-m-d H:i:s', strtotime(str_replace('-', '/', $_POST['date'])))."', Type = '".$oldact['Type']."', Value = :op_value, IdAccount = :account, External = :external, Common = ".(isset($_POST['common']) && $cuentacomun['Common']==0 ? 1 : 0).", IdCategory = :category, Description = :description WHERE id = :id");
+        $sql->bindParam(':op_value', $op_value);
+        $sql->bindParam(':account', test_input($_POST['account']));
+        $sql->bindParam(':external', test_input($_POST['external']));
+        $sql->bindParam(':category', test_input($_POST['category']));
+        $sql->bindParam(':description', test_input($_POST['description']));
+        $sql->bindParam(':id', test_input($_GET['id']));
+        $sql->execute();
+        
+        $sql=$con->prepare("UPDATE ".$tableaccounts." SET Balance = ROUND(Balance - :op_value, 2) WHERE IdAccount = :account");
+        $sql->bindParam(':op_value', $op_value);
+        $sql->bindParam(':account', $oldact['IdAccount']);
+        $sql->execute();
+        
+        $sql=$con->prepare("UPDATE ".$tableaccounts." SET Balance = ROUND(Balance + :op_value, 2) WHERE IdAccount = :account");
+        $sql->bindParam(':op_value', $op_value);
+        $sql->bindParam(':account', test_input($_POST['account']));
+        $sql->execute();
+    }
+    if (isset($_POST['edittransf'])) {
+        $sql=$con->prepare("SELECT * FROM ".$tabletrans." WHERE id = :id");
+        $sql->bindParam(':id', $_GET['id']);
+        $sql->execute();
+        $oldtrans = $sql->fetch(PDO::FETCH_ASSOC);
+        
+        $sql=$con->prepare("UPDATE ".$tableact." SET IdUser = ".$oldtrans['IdUser'].", Date = '".date('Y-m-d H:i:s', strtotime(str_replace('-', '/', $_POST['date'])))."', Value = :value, IdAccountOrig = :originaccount, IdAccountDest = :destaccount WHERE id = :id");
+        $sql->bindParam(':value', test_input($_POST['value']));
+        $sql->bindParam(':originaccount', test_input($_POST['originaccount']));
+        $sql->bindParam(':destaccount', test_input($_POST['destaccount']));
+        $sql->execute();
+        
+        $sql=$con->prepare("UPDATE ".$tableaccounts." SET Balance = ROUND(Balance + :value, 2) WHERE IdAccount = :originaccount");
+        $sql->bindParam(':value', test_input($_POST['value']));
+        $sql->bindParam(':originaccount', $oldtrans['IdAccountOrig']);
+        $sql->execute();
+        $sql=$con->prepare("UPDATE ".$tableaccounts." SET Balance = ROUND(Balance - :value, 2) WHERE IdAccount = :destaccount");
+        $sql->bindParam(':value', test_input($_POST['value']));
+        $sql->bindParam(':destaccount', $oldtrans['IdAccountDest']);
+        $sql->execute();
+        
+        $sql=$con->prepare("UPDATE ".$tableaccounts." SET Balance = ROUND(Balance - :value, 2) WHERE IdAccount = :originaccount");
+        $sql->bindParam(':value', test_input($_POST['value']));
+        $sql->bindParam(':originaccount', test_input($_POST['originaccount']));
+        $sql->execute();
+        $sql=$con->prepare("UPDATE ".$tableaccounts." SET Balance = ROUND(Balance + :value, 2) WHERE IdAccount = :destaccount");
+        $sql->bindParam(':value', test_input($_POST['value']));
+        $sql->bindParam(':destaccount', test_input($_POST['destaccount']));
+        $sql->execute();
+    }
     echo "<script languaje='javascript'>window.open('index.php','_self');</script>";
 }
 catch (PDOException $e) {
