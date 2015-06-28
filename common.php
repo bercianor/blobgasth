@@ -54,13 +54,13 @@
     </tr>
 <?php
     try {
-        $sql=$con->prepare("SELECT ".$tableuser.".User AS User, ROUND(SUM(".$tableact.".Value),2) AS Value FROM ".$tableact." JOIN ".$tableuser." ON ".$tableact.".IdUser = ".$tableuser.".IdUser WHERE ".$tableact.".Common = 1 AND ".$tableuser.".User != :user GROUP BY ".$tableuser.".User ORDER BY ".$tableuser.".IdUser ASC");
+        $sql=$con->prepare("SELECT ".$tableuser.".User AS User, ROUND(SUM(CASE WHEN (".$tableact.".Common = 1) THEN ".$tableact.".Value ELSE 0 END),2) AS Value FROM ".$tableuser." LEFT JOIN ".$tableact." ON ".$tableuser.".IdUser = ".$tableact.".IdUser WHERE ".$tableuser.".User != :user GROUP BY ".$tableuser.".User ORDER BY ".$tableuser.".IdUser ASC");
         $sql->bindParam(':user', $_SESSION['user']);
         $sql->execute();
         while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
             echo "<tr>";
             echo "    <td>" . $row['User'] . "</td>";
-            echo "    <td>" . $row['Value'] . " €</td>";
+            echo "    <td align='right'>" . $row['Value'] . " €</td>";
             echo "</tr>";
         }
     }
@@ -98,10 +98,9 @@ jQuery(document).ready(function($){
             $.get("common_ajax.php?iduser=" + $("#users").val(), function(data, status){
                 if (status === "success") {
                     var total = parseFloat(<?php echo round($total, 2); ?>);
-                    //var n = parseInt(<?php echo $n; ?>);
                     data = parseFloat(data);
                     var adjust = (data-total)/2;
-                    $("#otheruser").html("El saldo es de: " + data.toFixed(2) + " €.<br>El ajuste es de: " + adjust.toFixed(2) + " €");
+                    $("#otheruser").html("El saldo es de: " + data.toFixed(2) + " €<br>El ajuste es de: " + adjust.toFixed(2) + " €");
                 }
                 else {
                     $("#otheruser").html("Error: " + status);

@@ -1,4 +1,6 @@
-<!--
+<?php include 'db.con.php'; ?>
+<?php
+/*
     Blobgasth Copyright (C) 2015  bercianor[at]haztelo[dot]es
 
     This program is free software: you can redistribute it and/or modify
@@ -13,11 +15,9 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
--->
-<?php include 'db.con.php'; ?>
-<?php
+*/
 try {
-    $sql=$con->prepare("SELECT ROUND(SUM(".$tableact.".Value), 2) AS Value FROM ".$tableact." JOIN ".$tableuser." ON ".$tableact.".IdUser=".$tableuser.".IdUser WHERE ".$tableact.".Common = TRUE AND ".$tableact.".Date >= ".$tableuser.".Corte AND ".$tableact.".IdUser = :iduser");
+    $sql=$con->prepare("SELECT ROUND(SUM(".$tableact.".Value), 2) AS Value FROM ".$tableact." JOIN ".$tableuser." ON ".$tableact.".IdUser=".$tableuser.".IdUser WHERE ".$tableact.".Common = 1 AND ".$tableact.".Date >= ".$tableuser.".Cutoff AND ".$tableact.".IdUser = :iduser");
     $sql->bindParam(':iduser', $_GET['iduser']);
     $sql->execute();
     $row = $sql->fetch(PDO::FETCH_ASSOC);

@@ -59,12 +59,7 @@ try{
         $sql->execute();
     }
     if (isset($_POST['newact'])) {
-        if (test_input($_POST['type']) == 'Expense' && test_input($_POST['value'])>0) {
-            $op_value = -test_input($_POST['value']);
-        }
-        else {
-            $op_value = test_input($_POST['value']);
-        }
+        ((test_input($_POST['type']) == 'Expense' && test_input($_POST['value'])>0) ? ($op_value = -test_input($_POST['value'])) : ($op_value = test_input($_POST['value'])));
         
         $sql=$con->prepare("SELECT IdUser FROM ".$tableuser." WHERE User = :user");
         $sql->bindParam(':user', $_SESSION['user']);
@@ -90,7 +85,7 @@ try{
         $sql->bindParam(':account', test_input($_POST['account']));
         $sql->execute();
     }
-    if (isset($_POST['transf'])) {
+    if (isset($_POST['newtransf'])) {
         $sql=$con->prepare("SELECT IdUser FROM ".$tableuser." WHERE User = :user");
         $sql->bindParam(':user', $_SESSION['user']);
         $sql->execute();
@@ -115,6 +110,6 @@ try{
     echo "<script languaje='javascript'>window.open('index.php','_self');</script>";
 }
 catch (PDOException $e) {
-    'ops.php Error: ' . $e->getMessage();
+    echo 'ops.php Error: ' . $e->getMessage();
 }
 ?>

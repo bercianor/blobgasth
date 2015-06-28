@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
     Blobgasth Copyright (C) 2015  bercianor[at]haztelo[dot]es
 
     This program is free software: you can redistribute it and/or modify
@@ -13,8 +14,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
--->
-<?php
+*/
 try {
     if ($settings['database']['driver'] == 'mysql') {
         $tableactdatemonth="DATE_FORMAT(".$tableact.".Date,'%Y%m')";

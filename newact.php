@@ -113,7 +113,7 @@ jQuery(document).ready(function($){
                 <option value="" selected>Selecciona una cuenta:</option>
 <?php
                 try {
-                    $sql=$con->prepare("SELECT DISTINCT ".$tableaccounts.".IdAccount, ".$tableaccounts.".Account FROM ".$tableaccounts." JOIN ".$tableuser." ON ".$tableaccounts.".IdUser = ".$tableuser.".IdUser WHERE ".$tableuser.".User = :user OR ".$tableaccounts.".Common = TRUE ORDER BY ".$tableaccounts.".IdAccount ASC");
+                    $sql=$con->prepare("SELECT DISTINCT ".$tableaccounts.".IdAccount, ".$tableaccounts.".Account FROM ".$tableaccounts." JOIN ".$tableuser." ON ".$tableaccounts.".IdUser = ".$tableuser.".IdUser WHERE ".$tableuser.".User = :user OR ".$tableaccounts.".Common = 1 ORDER BY ".$tableaccounts.".IdAccount ASC");
                     $sql->bindParam(':user', $_SESSION['user']);
                     $sql->execute();
                     while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
@@ -189,6 +189,6 @@ jQuery(document).ready(function($){
             <td align="right">Descripción:</td><td><input type="text" class="formelem" name="description" id="description" placeholder="Descripción del movimiento"></td>
         </tr>
         <tr id="newactdiv"><td></td><td><input type="submit" class="formelem" name="newact" id="newact" value="Nuevo movimiento"></td></tr>
-        <tr id="transfdiv"><td></td><td><input type="submit" class="formelem" name="transf" id="transf" value="Nueva transferencia"></td></tr>
+        <tr id="transfdiv"><td></td><td><input type="submit" class="formelem" name="transf" id="newtransf" value="Nueva transferencia"></td></tr>
     </table></div>
 </form>

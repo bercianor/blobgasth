@@ -23,8 +23,8 @@
         <th>Valor</th>
         <th>Cuenta</th>
         <th>Externo</th>
-        <th>Categoria</th>
-        <th>Descripcion</th>
+        <th>Categoría</th>
+        <th>Descripción</th>
     </tr>
 <?php
     $total = 0;

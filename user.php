@@ -73,6 +73,6 @@ try {
     }
 }
 catch (PDOException $e) {
-    'user.php Error: ' . $e->getMessage();
+    echo 'user.php Error: ' . $e->getMessage();
 }
 ?>
