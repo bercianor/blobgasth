@@ -74,7 +74,6 @@ try {
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
         );
         $con = new PDO($dsn, $settings['database']['username'], $settings['database']['password'], $options);
-        (($settings['database']['port'] == "") ? ($con->exec("SET lc_time_names = '".$_SESSION['lang']."'")) : null);
         if (!tableExists($con, $tablecat)) {
             $sql=$con->prepare("
                 CREATE TABLE IF NOT EXISTS `" . $tablecat . "` (
@@ -169,6 +168,7 @@ try {
             $sql=$con->prepare("ALTER TABLE `" . $tableuser . "` MODIFY `IdUser` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1");
             $sql->execute();
 ?>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
             <div id="firstuser" style="position:relative; z-index: 0">
                 <div class="subtitle">Nuevo Usuario</div>
                 <br>
@@ -177,7 +177,7 @@ try {
                         <td align="right">Usuario:</td><td><input type="text" class="formelem" name="newuser" placeholder="Usuario"></td>
                     </tr>
                     <tr>
-                        <td align="right">Contraseña:</td><td><input type="password" class="formelem" name="newuserpass" placeholder="Nueva Contraseña"></td>
+                        <td align="right">Contraseña:</td><td><input type="password" class="formelem" name="newuserpass" placeholder="Contraseña"></td>
                     </tr>
                     <tr>
                         <td align="right">Repite la Contraseña:</td><td><input type="password" class="formelem" name="newuserreppass" placeholder="Repite la contraseña"></td>
@@ -261,6 +261,7 @@ try {
             ");
             $sql->execute();
 ?>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
             <div id="firstuser" style="position:relative; z-index: 0">
                 <div class="subtitle">Nuevo Usuario</div>
                 <br>
@@ -269,7 +270,7 @@ try {
                         <td align="right">Usuario:</td><td><input type="text" class="formelem" name="newuser" placeholder="Usuario"></td>
                     </tr>
                     <tr>
-                        <td align="right">Contraseña:</td><td><input type="password" class="formelem" name="newuserpass" placeholder="Nueva Contraseña"></td>
+                        <td align="right">Contraseña:</td><td><input type="password" class="formelem" name="newuserpass" placeholder="Contraseña"></td>
                     </tr>
                     <tr>
                         <td align="right">Repite la Contraseña:</td><td><input type="password" class="formelem" name="newuserreppass" placeholder="Repite la contraseña"></td>

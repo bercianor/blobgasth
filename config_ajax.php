@@ -24,7 +24,7 @@ if ($_GET['type'] == 'newuser') {
             <td align="right">Usuario:</td><td><input type="text" class="formelem" name="newuser" placeholder="Usuario"></td>
         </tr>
         <tr>
-            <td align="right">Contraseña:</td><td><input type="password" class="formelem" name="newuserpass" placeholder="Nueva Contraseña"></td>
+            <td align="right">Contraseña:</td><td><input type="password" class="formelem" name="newuserpass" placeholder="Contraseña"></td>
         </tr>
         <tr>
             <td align="right">Repite la Contraseña:</td><td><input type="password" class="formelem" name="newuserreppass" placeholder="Repite la contraseña"></td>

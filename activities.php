@@ -16,15 +16,27 @@
 -->
 <?php include 'db.con.php'; ?>
 <div id="title">Movimientos</div>
-<br><div align="center"><select name="meses" id="meses" align="center">
+<br><div align="center"><select name="months" id="months" align="center">
 <?php
     $months = array("enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre");
     echo '<option value="" selected>Mes actual: '.$months[date('n')-1].' '.date('y').'</option>';
     try {
-        $sql=$con->prepare("SELECT DISTINCT DATE_FORMAT(".$tableact.".Date,'%Y%m') AS value, DATE_FORMAT(".$tableact.".Date,'%M %y') AS month FROM ".$tableact." WHERE DATE_FORMAT(".$tableact.".Date,'%Y%m') <> DATE_FORMAT(now(),'%Y%m')ORDER BY ".$tableact.".Date ASC");
+        if ($settings['database']['driver'] == 'mysql') {
+            $tableactdatevalue="DATE_FORMAT(".$tableact.".Date,'%Y%m')";
+            $tableactdatemonth="DATE_FORMAT(".$tableact.".Date,'%m')";
+            $tableactdateyear="DATE_FORMAT(".$tableact.".Date,'%Y')";
+            $tableactdatenow="DATE_FORMAT(Now(),'%Y%m')";
+        }
+        else if ($settings['database']['driver'] == 'sqlite') {
+            $tableactdatevalue="strftime('%Y%m', ".$tableact.".Date)";
+            $tableactdatemonth="strftime('%m', ".$tableact.".Date)";
+            $tableactdateyear="strftime('%Y', ".$tableact.".Date)";
+            $tableactdatenow="strftime('%Y%m', 'now')";
+        }
+        $sql=$con->prepare("SELECT DISTINCT ".$tableactdatemonth." AS month, ".$tableactdateyear." AS year FROM ".$tableact." WHERE ".$tableactdatevalue." <> ".$tableactdatenow." ORDER BY ".$tableact.".Date ASC");
         $sql->execute();
         while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
-            echo '<option value="'.$row['value'].'">'.$row['month'].'</option>';
+            echo '<option value="'.$row['year'].$row['month'].'">'.$months[$row['month']-1].' '.$row['year'].'</option>';
         }
     }
     catch (PDOException $e) {
@@ -46,10 +58,10 @@ jQuery(document).ready(function($){
             $("#activitytables").html("Error: " + status);
         }
     });
-    $("#meses").change(function(){
+    $("#months").change(function(){
         $("#activitytables").slideUp("slow", function(){
             $("#activitytables").html("");
-            if ($("#meses").val() === "") {
+            if ($("#months").val() === "") {
                 $.get("activities_ajax.php?month=" + yyyy+(mm[1]?mm:"0"+mm[0]), function(data, status){
                     if (status === "success") {
                         $("#activitytables").html(data);
@@ -61,7 +73,7 @@ jQuery(document).ready(function($){
                 });
             }
             else {
-                $.get("activities_ajax.php?month=" + $("#meses").val(), function(data, status){
+                $.get("activities_ajax.php?month=" + $("#months").val(), function(data, status){
                     if (status === "success") {
                         $("#activitytables").html(data);
                         $("#activitytables").slideDown("slow");

@@ -26,7 +26,7 @@ try{
             $sql->execute();
         }
         else {
-            echo "<script languaje='javascript'>alert('Las contraseÃ±as no coinciden')</script>";
+            echo "<script languaje='javascript'>alert('Las contraseñas no coinciden')</script>";
             echo "<script languaje='javascript'>window.open('index.php?page=user&tipo=newpass','_self');</script>";
         }
     }
@@ -38,7 +38,7 @@ try{
             $sql->execute();
         }
         else {
-            echo "<script languaje='javascript'>alert('Las contraseÃ±as no coinciden')</script>";
+            echo "<script languaje='javascript'>alert('Las contraseñas no coinciden')</script>";
             echo "<script languaje='javascript'>window.open('index.php?page=user&tipo=newuser','_self');</script>";
         }
     }
