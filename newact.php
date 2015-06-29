@@ -90,27 +90,27 @@ jQuery(document).ready(function($){
     });
 });
 </script>
-<div id="title">Añadir Movimientos</div>
+<div id="title"><?php echo $addactivity_text; ?></div>
 <form action="ops.php" method="post">
     <div id="typediv" align="center">
-        Tipo: <select name="type" id="type">
-            <option value="" selected>Tipo de movimiento:</option>
-            <option value="Expense">Gasto</option>
-            <option value="Income">Ingreso</option>
-            <option value="Transfer">Transferencia</option>
+        <?php echo $type_text; ?>: <select name="type" id="type">
+            <option value="" selected><?php echo $activitytype_text; ?>:</option>
+            <option value="Expense"><?php echo $expense_text; ?></option>
+            <option value="Income"><?php echo $income_text; ?></option>
+            <option value="Transfer"><?php echo $transf_text; ?></option>
         </select>
     </div>
     <br>
     <div class="form" style="display:none"><table class="form" align="center" border='0'>
         <tr id="datediv" style="display:none">
-            <td align="right">Fecha:</td><td><input type="datetime-local" class="formelem" name="date" id="date" placeholder="Fecha del movimiento"></td>
+            <td align="right"><?php echo $date_text; ?>:</td><td><input type="datetime-local" class="formelem" name="date" id="date" placeholder="<?php echo $actdate_text; ?>"></td>
         </tr>
         <tr id="valuediv" style="display:none">
-            <td align="right">Valor:</td><td><input type="number" class="formelem" name="value" id="value" placeholder="Valor de la operación" step="0.01" required></td>
+            <td align="right"><?php echo $value_text; ?>:</td><td><input type="number" class="formelem" name="value" id="value" placeholder="<?php echo $opvalue_text; ?>" step="0.01" required></td>
         </tr>
         <tr id="accountdiv" style="display:none">
-            <td align="right">Cuenta:</td><td><select class="formelem" name="account" id="account">
-                <option value="" selected>Selecciona una cuenta:</option>
+            <td align="right"><?php echo $account_text; ?>:</td><td><select class="formelem" name="account" id="account">
+                <option value="" selected><?php echo $selectaccount_text; ?>:</option>
 <?php
                 try {
                     $sql=$con->prepare("SELECT DISTINCT ".$tableaccounts.".IdAccount, ".$tableaccounts.".Account FROM ".$tableaccounts." JOIN ".$tableuser." ON ".$tableaccounts.".IdUser = ".$tableuser.".IdUser WHERE ".$tableuser.".User = :user OR ".$tableaccounts.".Common = 1 ORDER BY ".$tableaccounts.".IdAccount ASC");
@@ -127,8 +127,8 @@ jQuery(document).ready(function($){
             </select></td>
         </tr>
         <tr id="originaccountdiv" style="display:none">
-            <td align="right">Cuenta origen:</td><td><select class="formelem" name="originaccount" id="originaccount">
-                <option value="" selected>Selecciona una cuenta:</option>
+            <td align="right"><?php echo $origaccount_text; ?>:</td><td><select class="formelem" name="originaccount" id="originaccount">
+                <option value="" selected><?php echo $selectaccount_text; ?>:</option>
 <?php
                 try {
                     $sql=$con->prepare("SELECT DISTINCT ".$tableaccounts.".IdAccount, ".$tableaccounts.".Account FROM ".$tableaccounts." JOIN ".$tableuser." ON ".$tableaccounts.".IdUser = ".$tableuser.".IdUser WHERE ".$tableuser.".User = :user OR ".$tableaccounts.".Common = 1 ORDER BY ".$tableaccounts.".IdAccount ASC");
@@ -145,8 +145,8 @@ jQuery(document).ready(function($){
             </select></td>
         </tr>
         <tr id="destaccountdiv" style="display:none">
-            <td align="right">Cuenta destino:</td><td><select class="formelem" name="destaccount" id="destaccount">
-                <option value="" selected>Selecciona una cuenta:</option>
+            <td align="right"><?php echo $destaccount_text; ?>:</td><td><select class="formelem" name="destaccount" id="destaccount">
+                <option value="" selected><?php echo $selectaccount_text; ?>:</option>
 <?php
                 try {
                     $sql=$con->prepare("SELECT DISTINCT ".$tableaccounts.".IdAccount, ".$tableaccounts.".Account FROM ".$tableaccounts." JOIN ".$tableuser." ON ".$tableaccounts.".IdUser = ".$tableuser.".IdUser WHERE ".$tableuser.".User = :user OR ".$tableaccounts.".Common = 1 ORDER BY ".$tableaccounts.".IdAccount ASC");
@@ -163,14 +163,14 @@ jQuery(document).ready(function($){
             </select></td>
         </tr>
         <tr id="externaldiv" style="display:none">
-            <td align="right">Externo:</td><td><input type="text" class="formelem" name="external" id="external" placeholder="A dónde va o de dónde viene"></td>
+            <td align="right"><?php echo $external_text; ?>:</td><td><input type="text" class="formelem" name="external" id="external" placeholder="<?php echo $externaldesc_text; ?>"></td>
         </tr>
         <tr id="commondiv" style="display:none">
-            <td align="right">¿Común?</td><td><input type="checkbox" class="formelem" name="common" id="common"></td>
+            <td align="right"><?php echo $common_text; ?></td><td><input type="checkbox" class="formelem" name="common" id="common"></td>
         </tr>
         <tr id="categorydiv" style="display:none">
-            <td align="right">Categoría:</td><td><select class="formelem" name="category" id="category">
-                <option value="" selected>Selecciona una categoría:</option>
+            <td align="right"><?php echo $category_text; ?>:</td><td><select class="formelem" name="category" id="category">
+                <option value="" selected><?php echo $selectcat_text; ?>:</option>
 <?php
                 try {
                     $sql=$con->prepare("SELECT DISTINCT ".$tablecat.".IdCategory, ".$tablecat.".Category FROM ".$tablecat." ORDER BY ".$tablecat.".IdCategory ASC");
@@ -186,9 +186,9 @@ jQuery(document).ready(function($){
             </select></td>
         </tr>
         <tr id="descriptiondiv" style="display:none">
-            <td align="right">Descripción:</td><td><input type="text" class="formelem" name="description" id="description" placeholder="Descripción del movimiento"></td>
+            <td align="right"><?php echo $description_text; ?>:</td><td><input type="text" class="formelem" name="description" id="description" placeholder="<?php echo $actdesc_text; ?>"></td>
         </tr>
-        <tr id="newactdiv"><td></td><td><input type="submit" class="formelem" name="newact" id="newact" value="Nuevo movimiento"></td></tr>
-        <tr id="transfdiv"><td></td><td><input type="submit" class="formelem" name="newtransf" id="newtransf" value="Nueva transferencia"></td></tr>
+        <tr id="newactdiv"><td></td><td><input type="submit" class="formelem" name="newact" id="newact" value="<?php echo $newact_text; ?>"></td></tr>
+        <tr id="transfdiv"><td></td><td><input type="submit" class="formelem" name="newtransf" id="newtransf" value="<?php echo $newtransf_text; ?>"></td></tr>
     </table></div>
 </form>

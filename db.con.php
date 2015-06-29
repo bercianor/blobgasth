@@ -16,6 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 session_start();
+include ((is_null($row['user'])) ? 'es_ES' : $_SESSION['lang']).'.php';
 function test_input($data) {
     $data = trim($data);
     $data = stripslashes($data);
@@ -154,7 +155,7 @@ try {
                 CREATE TABLE IF NOT EXISTS `" . $tableuser . "` (
                     `IdUser` int(11) NOT NULL,
                     `User` varchar(50) NOT NULL,
-                    `lang` varchar(5) NOT NULL DEFAULT 'ES_es',
+                    `lang` varchar(5) NOT NULL DEFAULT 'es_ES',
                     `Cutoff` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
                     `passhash` varchar(100) NOT NULL,
                     `authkey` text NOT NULL DEFAULT ''
@@ -170,25 +171,25 @@ try {
 ?>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
             <div id="firstuser" style="position:relative; z-index: 0">
-                <div class="subtitle">Nuevo Usuario</div>
+                <div class="subtitle"><?php echo $newuser_text; ?></div>
                 <br>
                 <form action="ops.php" method="post"><table class="form" align="center" border='0'>
                     <tr>
-                        <td align="right">Usuario:</td><td><input type="text" class="formelem" name="newuser" placeholder="Usuario"></td>
+                        <td align="right"><?php echo $user_text; ?>:</td><td><input type="text" class="formelem" name="newuser" placeholder="<?php echo $user_text; ?>"></td>
                     </tr>
                     <tr>
-                        <td align="right">Contraseña:</td><td><input type="password" class="formelem" name="newuserpass" placeholder="Contraseña"></td>
+                        <td align="right"><?php echo $password_text; ?>:</td><td><input type="password" class="formelem" name="newuserpass" placeholder="<?php echo $password_text; ?>"></td>
                     </tr>
                     <tr>
-                        <td align="right">Repite la Contraseña:</td><td><input type="password" class="formelem" name="newuserreppass" placeholder="Repite la contraseña"></td>
+                        <td align="right"><?php echo $repeatpassword_text; ?>:</td><td><input type="password" class="formelem" name="newuserreppass" placeholder="<?php echo $repeatpassword_text; ?>"></td>
                     </tr>
                     <tr>
-                        <td></td><td><input type="submit" class="formelem" name="newuserb" value="Enviar"></td>
+                        <td></td><td><input type="submit" class="formelem" name="newuserb" value="<?php echo $send_text; ?>"></td>
                     </tr>
                 </table></form>
             </div>
 <?php
-            exit("Crear el primer usuario");
+            exit();
         }
     }
     else if ($settings['database']['driver'] == 'sqlite') {
@@ -253,7 +254,7 @@ try {
                 CREATE TABLE IF NOT EXISTS " . $tableuser . " (
                     IdUser INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                     User TEXT NOT NULL COLLATE NOCASE,
-                    lang TEXT NOT NULL DEFAULT 'ES_es',
+                    lang TEXT NOT NULL DEFAULT 'es_ES',
                     Cutoff INTEGER NOT NULL DEFAULT CURRENT_TIMESTAMP,
                     passhash TEXT NOT NULL,
                     authkey TEXT NOT NULL DEFAULT ''
@@ -263,25 +264,25 @@ try {
 ?>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
             <div id="firstuser" style="position:relative; z-index: 0">
-                <div class="subtitle">Nuevo Usuario</div>
+                <div class="subtitle"><?php echo $newuser_text; ?></div>
                 <br>
                 <form action="ops.php" method="post"><table class="form" align="center" border='0'>
                     <tr>
-                        <td align="right">Usuario:</td><td><input type="text" class="formelem" name="newuser" placeholder="Usuario"></td>
+                        <td align="right"><?php echo $user_text; ?>:</td><td><input type="text" class="formelem" name="newuser" placeholder="<?php echo $user_text; ?>"></td>
                     </tr>
                     <tr>
-                        <td align="right">Contraseña:</td><td><input type="password" class="formelem" name="newuserpass" placeholder="Contraseña"></td>
+                        <td align="right"><?php echo $password_text; ?>:</td><td><input type="password" class="formelem" name="newuserpass" placeholder="<?php echo $password_text; ?>"></td>
                     </tr>
                     <tr>
-                        <td align="right">Repite la Contraseña:</td><td><input type="password" class="formelem" name="newuserreppass" placeholder="Repite la contraseña"></td>
+                        <td align="right"><?php echo $repeatpassword_text; ?>:</td><td><input type="password" class="formelem" name="newuserreppass" placeholder="<?php echo $repeatpassword_text; ?>"></td>
                     </tr>
                     <tr>
-                        <td></td><td><input type="submit" class="formelem" name="newuserb" value="Enviar"></td>
+                        <td></td><td><input type="submit" class="formelem" name="newuserb" value="<?php echo $send_text; ?>"></td>
                     </tr>
                 </table></form>
             </div>
 <?php
-            exit("Crear el primer usuario");
+            exit();
         }
     }
 }

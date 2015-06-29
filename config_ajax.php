@@ -14,57 +14,58 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
+<?php include 'db.con.php'; ?>
 <?php 
 if ($_GET['type'] == 'newuser') {
 ?>
-    <div class="subtitle">Nuevo Usuario</div>
+    <div class="subtitle"><?php echo $newuser_text; ?></div>
     <br>
     <form action="ops.php" method="post"><table class="form" align="center" border='0'>
         <tr>
-            <td align="right">Usuario:</td><td><input type="text" class="formelem" name="newuser" placeholder="Usuario"></td>
+            <td align="right"><?php echo $user_text; ?>:</td><td><input type="text" class="formelem" name="newuser" placeholder="<?php echo $user_text; ?>"></td>
         </tr>
         <tr>
-            <td align="right">Contraseña:</td><td><input type="password" class="formelem" name="newuserpass" placeholder="Contraseña"></td>
+            <td align="right"><?php echo $password_text; ?>:</td><td><input type="password" class="formelem" name="newuserpass" placeholder="<?php echo $password_text; ?>"></td>
         </tr>
         <tr>
-            <td align="right">Repite la Contraseña:</td><td><input type="password" class="formelem" name="newuserreppass" placeholder="Repite la contraseña"></td>
+            <td align="right"><?php echo $repeatpassword_text; ?>:</td><td><input type="password" class="formelem" name="newuserreppass" placeholder="<?php echo $repeatpassword_text; ?>"></td>
         </tr>
         <tr>
-            <td></td><td><input type="submit" class="formelem" name="newuserb" value="Enviar"></td>
+            <td></td><td><input type="submit" class="formelem" name="newuserb" value="<?php echo $send_text; ?>"></td>
         </tr>
     </table></form>
 <?php
 }
 else if ($_GET['type'] == 'newcat') {
 ?>
-    <div class="subtitle">Añadir Categoría</div>
+    <div class="subtitle"><?php echo $addcat_text; ?></div>
     <br>
     <form action="ops.php" method="post"><table class="form" align="center" border='0'>
         <tr>
-            <td align="right">Nombre de la categoría:</td><td><input type="text" class="formelem" name="category" placeholder="Nombre de la categoría"></td>
+            <td align="right"><?php echo $catname_text; ?>:</td><td><input type="text" class="formelem" name="category" placeholder="<?php echo $catname_text; ?>"></td>
         </tr>
         <tr>
-            <td></td><td><input type="submit" class="formelem" name="newcat" value="Enviar"></td>
+            <td></td><td><input type="submit" class="formelem" name="newcat" value="<?php echo $send_text; ?>"></td>
         </tr>
     </table></form>
 <?php
 }
 else if ($_GET['type'] == 'newaccount') {
 ?>
-    <div class="subtitle">Añadir Cuenta</div>
+    <div class="subtitle"><?php echo $addaccount_text; ?></div>
     <br>
     <form action="ops.php" method="post"><table class="form" align="center" border='0'>
         <tr>
-            <td align="right">Nombre de la Cuenta:</td><td><input type="text" class="formelem" name="account" placeholder="Nombre de la Cuenta"></td>
+            <td align="right"><?php echo $accountname_text; ?>:</td><td><input type="text" class="formelem" name="account" placeholder="<?php echo $accountname_text; ?>"></td>
         </tr>
         <tr>
-            <td align="right">Balance inicial:</td><td><input type="number" class="formelem" name="balance" placeholder="Balance inicial de la cuenta"></td>
+            <td align="right"><?php echo $initialbalance_text; ?>:</td><td><input type="number" class="formelem" name="balance" placeholder="<?php echo $initialbalancedesc_text; ?>"></td>
         </tr>
         <tr>
-            <td align="right">¿Cuenta Común?</td><td><input type="checkbox" class="formelem" name="common"></td>
+            <td align="right"><?php echo $commonaccount_text; ?></td><td><input type="checkbox" class="formelem" name="common"></td>
         </tr>
         <tr>
-            <td></td><td><input type="submit" class="formelem" name="newaccount" value="Enviar"></td>
+            <td></td><td><input type="submit" class="formelem" name="newaccount" value="<?php echo $send_text; ?>"></td>
         </tr>
     </table></form>
 <?php

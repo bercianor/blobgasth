@@ -36,8 +36,8 @@ try {
         $sql->execute();
         $row = $sql->fetch(PDO::FETCH_ASSOC);
         if (is_null($row['User'])) {
-            echo "<script languaje='javascript'>alert('Acceso denegado: Usuario incorrecto')</script>";
-            exit("Acceso denegado: Usuario incorrecto");
+            echo "<script languaje='javascript'>alert('".$novaliduser_text."')</script>";
+            exit($novaliduser_text);
         }
         else {
             if (password_verify($_POST['password'],$row['passhash'])) {
@@ -51,23 +51,23 @@ try {
                 $sql->execute();
             }
             else {
-                echo "<script languaje='javascript'>alert('Acceso denegado: Contraseña incorrecta')</script>";
-                exit("Acceso denegado: Contraseña incorrecta");
+                echo "<script languaje='javascript'>alert('".$novalidpass_text."')</script>";
+                exit($novalidpass_text);
             }
         }
         echo "<script languaje='javascript'>window.open('index.php','_self');</script>";
     }
     if ($_GET['type'] == 'newpass') {
 ?>
-        <div id="title">Cambiar Contraseña</div>
+        <div id="title"><?php echo $changepass_text; ?></div>
         <form action="ops.php" method="post"><table class="form" align="center" border='0'>
             <tr>
-                <td align="right">Nueva contraseña:</td><td><input type="password" class="formelem" name="newpass" placeholder="Nueva Contraseña"></td>
+                <td align="right"><?php echo $newpass_text; ?>:</td><td><input type="password" class="formelem" name="newpass" placeholder="<?php echo $newpass_text; ?>"></td>
             </tr>
             <tr>
-                <td align="right">Repetir contraseña:</td><td><input type="password" class="formelem" name="reppass" placeholder="Repite la contraseña"></td>
+                <td align="right"><?php echo $repeatpassword_text; ?>:</td><td><input type="password" class="formelem" name="reppass" placeholder="<?php echo $repeatpassword_text; ?>"></td>
             </tr>
-            <tr><td></td><td><input type="submit" name="newpassb" class="formelem" value="Enviar"></td></tr>
+            <tr><td></td><td><input type="submit" name="newpassb" class="formelem" value="<?php echo $send_text; ?>"></td></tr>
         </table></form>
 <?php
     }

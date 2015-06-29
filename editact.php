@@ -98,18 +98,18 @@ else if ($_GET['type'] == 'activity') {
     $edit = $sql->fetch(PDO::FETCH_ASSOC);
 }
 ?>
-<div id="title">Editar Movimiento</div>
+<div id="title"><?php echo $editact_text; ?></div>
 <form action="ops.php?id=<?php echo $_GET['id'] ?>" method="post">
     <div class="form" style="display:none"><table class="form" align="center" border='0'>
         <tr id="datediv" style="display:none">
-            <td align="right">Fecha:</td><td><input type="datetime-local" class="formelem" name="date" id="date" value="<?php echo date('Y-m-d', strtotime($edit['Date'])).'T'.date('H:i:s.u', strtotime($edit['Date'])); ?>"></td>
+            <td align="right"><?php echo $date_text; ?>:</td><td><input type="datetime-local" class="formelem" name="date" id="date" value="<?php echo date('Y-m-d', strtotime($edit['Date'])).'T'.date('H:i:s.u', strtotime($edit['Date'])); ?>"></td>
         </tr>
         <tr id="valuediv" style="display:none">
-            <td align="right">Valor:</td><td><input type="number" class="formelem" name="value" id="value" step="0.01" required value=<?php echo $edit['Value']; ?>></td>
+            <td align="right"><?php echo $value_text; ?>:</td><td><input type="number" class="formelem" name="value" id="value" step="0.01" required value=<?php echo $edit['Value']; ?>></td>
         </tr>
         <tr id="accountdiv" style="display:none">
-            <td align="right">Cuenta:</td><td><select class="formelem" name="account" id="account">
-                <option value="">Selecciona una cuenta:</option>
+            <td align="right"><?php echo $account_text; ?>:</td><td><select class="formelem" name="account" id="account">
+                <option value=""><?php echo $selectaccount_text; ?>:</option>
 <?php
                 try {
                     $sql=$con->prepare("SELECT DISTINCT ".$tableaccounts.".IdAccount, ".$tableaccounts.".Account FROM ".$tableaccounts." JOIN ".$tableuser." ON ".$tableaccounts.".IdUser = ".$tableuser.".IdUser WHERE ".$tableuser.".User = :user OR ".$tableaccounts.".Common = 1 ORDER BY ".$tableaccounts.".IdAccount ASC");
@@ -126,8 +126,8 @@ else if ($_GET['type'] == 'activity') {
             </select></td>
         </tr>
         <tr id="originaccountdiv" style="display:none">
-            <td align="right">Cuenta origen:</td><td><select class="formelem" name="originaccount" id="originaccount">
-                <option value="" selected>Selecciona una cuenta:</option>
+            <td align="right"><?php echo $origaccount_text; ?>:</td><td><select class="formelem" name="originaccount" id="originaccount">
+                <option value="" selected><?php echo $selectaccount_text; ?>:</option>
 <?php
                 try {
                     $sql=$con->prepare("SELECT DISTINCT ".$tableaccounts.".IdAccount, ".$tableaccounts.".Account FROM ".$tableaccounts." JOIN ".$tableuser." ON ".$tableaccounts.".IdUser = ".$tableuser.".IdUser WHERE ".$tableuser.".User = :user OR ".$tableaccounts.".Common = 1 ORDER BY ".$tableaccounts.".IdAccount ASC");
@@ -144,8 +144,8 @@ else if ($_GET['type'] == 'activity') {
             </select></td>
         </tr>
         <tr id="destaccountdiv" style="display:none">
-            <td align="right">Cuenta destino:</td><td><select class="formelem" name="destaccount" id="destaccount">
-                <option value="" selected>Selecciona una cuenta:</option>
+            <td align="right"><?php echo $destaccount_text; ?>:</td><td><select class="formelem" name="destaccount" id="destaccount">
+                <option value="" selected><?php echo $selectaccount_text; ?>:</option>
 <?php
                 try {
                     $sql=$con->prepare("SELECT DISTINCT ".$tableaccounts.".IdAccount, ".$tableaccounts.".Account FROM ".$tableaccounts." JOIN ".$tableuser." ON ".$tableaccounts.".IdUser = ".$tableuser.".IdUser WHERE ".$tableuser.".User = :user OR ".$tableaccounts.".Common = 1 ORDER BY ".$tableaccounts.".IdAccount ASC");
@@ -162,14 +162,14 @@ else if ($_GET['type'] == 'activity') {
             </select></td>
         </tr>
         <tr id="externaldiv" style="display:none">
-            <td align="right">Externo:</td><td><input type="text" class="formelem" name="external" id="external" value="<?php echo $edit['External']; ?>"></td>
+            <td align="right"><?php echo $external_text; ?>:</td><td><input type="text" class="formelem" name="external" id="external" value="<?php echo $edit['External']; ?>"></td>
         </tr>
         <tr id="commondiv" style="display:none">
-            <td align="right">¿Común?</td><td><input type="checkbox" class="formelem" name="common" id="common"<?php echo (($edit['Common']) ? ' checked' : '') ?>></td>
+            <td align="right"><?php echo $common_text; ?></td><td><input type="checkbox" class="formelem" name="common" id="common"<?php echo (($edit['Common']) ? ' checked' : '') ?>></td>
         </tr>
         <tr id="categorydiv" style="display:none">
-            <td align="right">Categoría:</td><td><select class="formelem" name="category" id="category">
-                <option value="" selected>Selecciona una categoría:</option>
+            <td align="right"><?php echo $category_text; ?>:</td><td><select class="formelem" name="category" id="category">
+                <option value="" selected><?php echo $selectcat_text; ?>:</option>
 <?php
                 try {
                     $sql=$con->prepare("SELECT DISTINCT ".$tablecat.".IdCategory, ".$tablecat.".Category FROM ".$tablecat." ORDER BY ".$tablecat.".IdCategory ASC");
@@ -185,9 +185,9 @@ else if ($_GET['type'] == 'activity') {
             </select></td>
         </tr>
         <tr id="descriptiondiv" style="display:none">
-            <td align="right">Descripción:</td><td><input type="text" class="formelem" name="description" id="description" value="<?php echo $edit['Description']; ?>"></td>
+            <td align="right"><?php echo $description_text; ?>:</td><td><input type="text" class="formelem" name="description" id="description" value="<?php echo $edit['Description']; ?>"></td>
         </tr>
-        <tr id="newactdiv"><td></td><td><input type="submit" class="formelem" name="editact" id="editact" value="Editar movimiento"></td></tr>
-        <tr id="transfdiv"><td></td><td><input type="submit" class="formelem" name="edittransf" id="edittransf" value="Editar transferencia"></td></tr>
+        <tr id="newactdiv"><td></td><td><input type="submit" class="formelem" name="editact" id="editact" value="<?php echo $editact_text; ?>"></td></tr>
+        <tr id="transfdiv"><td></td><td><input type="submit" class="formelem" name="edittransf" id="edittransf" value="<?php echo $edittransf_text; ?>"></td></tr>
     </table></div>
 </form>

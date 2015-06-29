@@ -15,14 +15,14 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <?php include 'db.con.php'; ?>
-<div id="title">Configuración</div>
+<div id="title"><?php echo $config_text; ?></div>
 <br>
 <div class="submenu" align="center">
-    <div class="submenuitem" id="newuser">Nuevo usuario</div>
+    <div class="submenuitem" id="newuser"><?php echo $newuser_text; ?></div>
     <div class="submenusep">|</div>
-    <div class="submenuitem" id="newcat">Nueva categoria</div>
+    <div class="submenuitem" id="newcat"><?php echo $newcat_text; ?></div>
     <div class="submenusep">|</div>
-    <div class="submenuitem" id="newaccount">Nueva cuenta</div>
+    <div class="submenuitem" id="newaccount"><?php echo $newaccount_text; ?></div>
 </div>
 <br>
 <script>

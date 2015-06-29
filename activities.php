@@ -15,11 +15,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <?php include 'db.con.php'; ?>
-<div id="title">Movimientos</div>
+<div id="title"><?php echo $activities_text; ?></div>
 <br><div align="center"><select name="months" id="months" align="center">
 <?php
-    $months = array("enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre");
-    echo '<option value="" selected>Mes actual: '.$months[date('n')-1].' '.date('y').'</option>';
+    echo '<option value="" selected>'.$actualmonth_text.': '.$months[date('n')-1].' '.date('y').'</option>';
     try {
         if ($settings['database']['driver'] == 'mysql') {
             $tableactdatevalue="DATE_FORMAT(".$tableact.".Date,'%Y%m')";

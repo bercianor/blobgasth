@@ -23,8 +23,8 @@ if (isset($_COOKIE['authkey'])){
         $sql->execute();
         $row = $sql->fetch(PDO::FETCH_ASSOC);
         if (is_null($row['user']) or ($row['authkey'] != $_COOKIE['authkey'])) {
-            echo "<script languaje='javascript'>alert('Acceso denegado: Cookie no válida')</script>";
-            exit("Acceso denegado: Cookie no válida");
+            echo "<script languaje='javascript'>alert('".$novalidcookie_text."')</script>";
+            exit($novalidcookie_text);
         }
         else {
             $_SESSION['user'] = $row['user'];
@@ -39,7 +39,7 @@ if (isset($_COOKIE['authkey'])){
 }
 if (isset($_GET['setcookie'])) {
     if ($_GET['setcookie']) {
-        date_default_timezone_set("Europe/Madrid"); //set according with lang
+        date_default_timezone_set($timezone); //set according with lang
         setcookie('authkey', $_SESSION['authkey'], mktime(22,0,0,7,20,2015)); //fecha (mktime) 3 meses
     }
 }
@@ -168,19 +168,19 @@ if (strpos($url,'index.php') !== false) {
             <img src="iconos/ic_menu_black_48dp.png" alt="menu" id="menubutton">
             <div id="menu" align="center">
                 <div id="topmenu" style="border-bottom: 1px solid;"></div>
-                <div class="menuitem" id="recap">Resumen</div>
+                <div class="menuitem" id="recap"><?php echo $recap_text; ?></div>
                 <div class="menusep">|</div>
-                <div class="menuitem" id="activities">Movimientos</div>
+                <div class="menuitem" id="activities"><?php echo $activities_text; ?></div>
                 <div class="menusep">|</div>
-                <div class="menuitem" id="common">Gastos Comunes</div>
+                <div class="menuitem" id="common"><?php echo $commonexpenses_text; ?></div>
                 <div class="menusep">|</div>
-                <div class="menuitem" id="newact">Nuevo movimiento</div>
+                <div class="menuitem" id="newact"><?php echo $newact_text; ?></div>
                 <div class="menusep">|</div>
-                <div class="menuitem" id="newpass">Cambiar pass</div>
+                <div class="menuitem" id="newpass"><?php echo $changepass_text; ?></div>
                 <div class="menusep">|</div>
-                <div class="menuitem" id="config">Configuración</div>
+                <div class="menuitem" id="config"><?php echo $config_text; ?></div>
                 <div class="menusep">|</div>
-                <div class="menuitem" id="logout">Cerrar Sesión</div>
+                <div class="menuitem" id="logout"><?php echo $logout_text; ?></div>
                 <div id="copyright" align="right" style="position:absolute; bottom:0"><a href="LICENSE">Copyright (C) 2015  bercianor</a></div>
             </div>
             <div id="all">
@@ -193,10 +193,10 @@ if (strpos($url,'index.php') !== false) {
         else {
 ?>
             <form id="login" action="user.php" method="post">
-                Usuario: <input type="text" class="formelem" name="user" placeholder="Usuario"><br>
-                Contraseña: <input type="password" class="formelem" name="password" placeholder="Contraseña"><br>
+                <?php echo $user_text; ?>: <input type="text" class="formelem" name="user" placeholder="<?php echo $user_text; ?>"><br>
+                <?php echo $password_text; ?>: <input type="password" class="formelem" name="password" placeholder="<?php echo $password_text; ?>"><br>
                 <br>
-                <input type="submit" class="formelem" name="login" value="Entrar">
+                <input type="submit" class="formelem" name="login" value="<?php echo $send_text; ?>">
             </form>
 <?php
             include 'footer.php';
@@ -205,10 +205,10 @@ if (strpos($url,'index.php') !== false) {
     else {
 ?>
         <form id="login" action="user.php" method="post">
-            Usuario: <input type="text" class="formelem" name="user" placeholder="Usuario"><br>
-            Contraseña: <input type="password" class="formelem" name="password" placeholder="Contraseña"><br>
+            <?php echo $user_text; ?>: <input type="text" class="formelem" name="user" placeholder="<?php echo $user_text; ?>"><br>
+            <?php echo $password_text; ?>: <input type="password" class="formelem" name="password" placeholder="<?php echo $password_text; ?>"><br>
             <br>
-            <input type="submit" class="formelem" name="login" value="Entrar">
+            <input type="submit" class="formelem" name="login" value="<?php echo $send_text; ?>">
         </form>
 <?php
         include 'footer.php';

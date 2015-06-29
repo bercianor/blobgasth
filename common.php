@@ -15,14 +15,14 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <?php include 'db.con.php'; ?>
-<div id="title">Gastos Comunes</div>
+<div id="title"><?php echo $commonexpenses_text; ?></div>
 <table class="tables" border='1' align="center">
     <tr class="header" align='center'>
-        <th>Fecha</th>
-        <th>Tipo</th>
-        <th>Valor</th>
-        <th>Categoría</th>
-        <th>Descripción</th>
+        <th><?php echo $date_text; ?></th>
+        <th><?php echo $type_text; ?></th>
+        <th><?php echo $value_text; ?></th>
+        <th><?php echo $category_text; ?></th>
+        <th><?php echo $description_text; ?></th>
     </tr>
 <?php
     $total = 0;
@@ -38,7 +38,7 @@
         $total += $row['Value'];
     }
     echo "<tr class='header'>";
-    echo "    <td>Total</td>";
+    echo "    <td>".$total_text."</td>";
     echo "    <td></td>";
     echo "    <td align='right'>" . round($total, 2) . " €</td>";
     echo "    <td></td>";
@@ -49,8 +49,8 @@
 <p>&nbsp;</p>
 <table class="tables" border='1' align="center">
     <tr class="header" align='center'>
-        <th>Usuario</th>
-        <th>Balance</th>
+        <th><?php echo $user_text; ?></th>
+        <th><?php echo $balance_text; ?></th>
     </tr>
 <?php
     try {
@@ -73,7 +73,7 @@
 <p>&nbsp;</p>
 <div id="adjust" align="center">
 <select name="users" id="users">
-    <option value="" selected>Selecciona un usuario:</option>
+    <option value="" selected><?php echo $selectuser_text; ?>:</option>
 <?php
         try {
             $sql=$con->prepare("SELECT DISTINCT ".$tableuser.".IdUser, ".$tableuser.".User FROM ".$tableuser." WHERE ".$tableuser.".User != :user ORDER BY ".$tableuser.".IdUser ASC");
@@ -100,7 +100,7 @@ jQuery(document).ready(function($){
                     var total = parseFloat(<?php echo round($total, 2); ?>);
                     data = parseFloat(data);
                     var adjust = (data-total)/2;
-                    $("#otheruser").html("El saldo es de: " + data.toFixed(2) + " €<br>El ajuste es de: " + adjust.toFixed(2) + " €");
+                    $("#otheruser").html("<?php echo $balanceis_text; ?>: " + data.toFixed(2) + " <?php echo $money_symbol; ?><br><?php echo $adjustis_text; ?>: " + adjust.toFixed(2) + " <?php echo $money_symbol; ?>");
                 }
                 else {
                     $("#otheruser").html("Error: " + status);

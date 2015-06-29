@@ -15,16 +15,16 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <?php include 'db.con.php'; ?>
-<div class="subtitle">Ingresos/Gastos</div>
+<div class="subtitle"><?php echo $incomesexpenses_text; ?></div>
 <table class="tables" border='1' align="center">
     <tr class="header" align='center'>
-        <th>Fecha</th>
-        <th>Tipo</th>
-        <th>Valor</th>
-        <th>Cuenta</th>
-        <th>Externo</th>
-        <th>Categoría</th>
-        <th>Descripción</th>
+        <th><?php echo $date_text; ?></th>
+        <th><?php echo $type_text; ?></th>
+        <th><?php echo $value_text; ?></th>
+        <th><?php echo $account_text; ?></th>
+        <th><?php echo $external_text; ?></th>
+        <th><?php echo $category_text; ?></th>
+        <th><?php echo $description_text; ?></th>
         <th></th>
     </tr>
 <?php
@@ -49,7 +49,7 @@
         $total += $row['Value'];
     }
     echo "<tr class='header'>";
-    echo "    <td>Total</td>";
+    echo "    <td>".$total_text."</td>";
     echo "    <td></td>";
     echo "    <td align='right'>" . round($total, 2) . " €</td>";
     echo "    <td></td>";
@@ -61,13 +61,13 @@
 ?>
 </table>
 <p>&nbsp;</p>
-<div class="subtitle">Transferencias</div>
+<div class="subtitle"><?php echo $transfers_text; ?></div>
 <table class="tables" border='1' align="center">
     <tr class="header" align='center'>
-        <th>Fecha</th>
-        <th>Valor</th>
-        <th>Cuenta Origen</th>
-        <th>Cuenta Destino</th>
+        <th><?php echo $date_text; ?></th>
+        <th><?php echo $value_text; ?></th>
+        <th><?php echo $origaccount_text; ?></th>
+        <th><?php echo $destaccount_text; ?></th>
         <th></th>
     </tr>
 <?php

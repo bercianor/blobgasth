@@ -15,14 +15,14 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <?php include 'db.con.php'; ?>
-<div id="title">Resumen</div>
+<div id="title"><?php echo $recap_text; ?></div>
 <div width="100%" align="center">
     <div class="recap" align="center">
-        <div class="subtitle">Balance de Cuentas</div>
+        <div class="subtitle"><?php echo $accountbalance_text; ?></div>
         <table class="tables" border='1'>
             <tr class="header" align='center'>
-                <th>Cuenta</th>
-                <th>Saldo</th>
+                <th><?php echo $account_text; ?></th>
+                <th><?php echo $balance_text; ?></th>
             </tr>
 <?php
             $total = 0;
@@ -41,18 +41,18 @@
                 echo "</tr>";
             }
             echo "<tr class='header'>";
-            echo "    <td>Total</td>";
+            echo "    <td>".$total_text."</td>";
             echo "    <td align='right'>" . round($total, 2) . " €</td>";
             echo "</tr>";
 ?>
         </table>
     </div>
     <div class="recap" align="center">
-        <div class="subtitle">Gastos por Categoría</div>
+        <div class="subtitle"><?php echo $categoryexpenses_text; ?></div>
         <table class="tables" border='1'>
             <tr class="header" align='center'>
-                <th>Categoría</th>
-                <th>Balance</th>
+                <th><?php echo $category_text; ?></th>
+                <th><?php echo $balance_text; ?></th>
             </tr>
 <?php
             $total = 0;
@@ -65,7 +65,7 @@
                 $total += $row['Value'];
             }
             echo "<tr class='header'>";
-            echo "    <td>Total</td>";
+            echo "    <td>".$total_text."</td>";
             echo "    <td align='right'>" . round($total, 2) . " €</td>";
             echo "</tr>";
 ?>
