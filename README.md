@@ -48,6 +48,7 @@ password = pass
 
 ##How to help to translate
 Fork the repo, open the file es\_ES.php and translate spanish strings into language you want to. Save the file with locale naming convention: [language](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes#Partial_ISO_639_table)\_[COUNTRY](https://en.wikipedia.org/wiki/ISO_3166-2#Current_codes). eg: es\_ES, es\_AR, en\_US ...
+Add language to the file languages.ini like: language_COUNTRY="Language name (Country name)"
 
 ###TODO list
 - [X] Add posibility to modify activities.
