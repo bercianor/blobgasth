@@ -60,10 +60,10 @@ try {
         <div id="title"><?php echo $changepass_text; ?></div>
         <form action="ops.php" method="post"><table class="form" align="center" border='0'>
             <tr>
-                <td align="right"><?php echo $newpass_text; ?>:</td><td><input type="password" class="formelem" name="newpass" placeholder="<?php echo $newpass_text; ?>"></td>
+                <td align="right"><?php echo $newpass_text; ?>:</td><td><input type="password" class="formelem" name="newpass" placeholder="<?php echo $newpass_text; ?>" required></td>
             </tr>
             <tr>
-                <td align="right"><?php echo $repeatpassword_text; ?>:</td><td><input type="password" class="formelem" name="reppass" placeholder="<?php echo $repeatpassword_text; ?>"></td>
+                <td align="right"><?php echo $repeatpassword_text; ?>:</td><td><input type="password" class="formelem" name="reppass" placeholder="<?php echo $repeatpassword_text; ?>" required></td>
             </tr>
             <tr><td></td><td><input type="submit" name="newpassb" class="formelem" value="<?php echo $send_text; ?>"></td></tr>
         </table></form>
@@ -74,7 +74,7 @@ try {
         <div id="title"><?php echo $changelang_text; ?></div>
         <form action="ops.php" method="post"><table class="form" align="center" border='0'>
             <tr>
-                <td align="right"><?php echo $newlang_text; ?>:</td><td><select class="formelem" name="newlang">
+                <td align="right"><?php echo $newlang_text; ?>:</td><td><select class="formelem" name="newlang" required>
                     <option value="" selected><?php echo $selectlang_text; ?>:</option>
 <?php
                     foreach ($languages['languages'] as $value => $text) {
