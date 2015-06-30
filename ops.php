@@ -14,7 +14,6 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php include 'db.con.php'; ?>
 <?php
 try{
@@ -30,11 +29,18 @@ try{
             echo "<script languaje='javascript'>window.open('index.php?page=user&tipo=newpass','_self');</script>";
         }
     }
+    if (isset($_POST['newlangb'])) {
+        $sql=$con->prepare("UPDATE ".$tableuser." SET lang = :newlang WHERE User = :user");
+        $sql->bindParam(':newlang', test_input($_POST['newlang']));
+        $sql->bindParam(':user', $_SESSION['user']);
+        $sql->execute();
+    }
     if (isset($_POST['newuserb'])) {
         if ($_POST['newuserpass'] == $_POST['newuserreppass']) {
-            $sql=$con->prepare("INSERT INTO ".$tableuser." (User, passhash) VALUES (:newuser, :newuserpass)");
+            $sql=$con->prepare("INSERT INTO ".$tableuser." (User, passhash, lang) VALUES (:newuser, :newuserpass, :newuserlang)");
             $sql->bindParam(':newuser', test_input($_POST['newuser']));
             $sql->bindParam(':newuserpass', password_hash(test_input($_POST['newuserpass']),PASSWORD_DEFAULT));
+            $sql->bindParam(':newuserlang', test_input($_POST['newuserlang']));
             $sql->execute();
         }
         else {

@@ -70,7 +70,7 @@ if (strpos($url,'index.php') !== false) {
         <script>
         jQuery(document).ready(function($){
             $(window).width() <= 768 ? $("#menu").css('left', -$("#menu").outerWidth()) : false
-            $("#topmenu").css('height', $("#logo").outerHeight());
+            $("#topmenu").css('height', $("#logo").outerHeight()/2);
             $("#all").css('left', $(window).width() <= 768 ? 0 : $("#menu").outerWidth());
             $("#all").css('top', $("#logo").outerHeight());
             $("#logo").css('left', $(window).width() <= 768 ? 0 : $("#menu").outerWidth());
@@ -120,43 +120,61 @@ if (strpos($url,'index.php') !== false) {
             
             $(".menuitem").click(function(){
                 selected = event.target.id;
-                $(".menuitem").css("background-color", $("#menu").css('background-color'));
-                $("#" + selected).css("background-color", "#F9F9F9");
-                if ($(window).width() <= 768) {
-                    $("#menu").animate({
-                        left: -$("#menu").outerWidth()
-                    }, "slow", "swing");
-                        $("#menubutton").show();
+                if (selected === "config"){
+                    $("#submenuconfig").slideToggle("slow", "swing");
+                    event.stopPropagation();
                 }
-                $("#content").animate({
-                    left: -$("#content").outerWidth()
-                }, "slow", "swing", function() {
-                    switch (selected) {
-                        case ('newpass'):
-                            var page = 'user.php?type=newpass';
-                            break;
-                        case ('logout'):
-                            var page = 'user.php?logout=true';
-                            break;
-                        default:
-                            var page = selected + '.php';
-                            break;
-                    }
-                    $.get(page, function(data, status){
-                        if (status === "success") {
-                            $("#content").html(data);
-                        }
-                        else {
-                            $("#content").html("Error: " + status);
-                        }
-                        $("#content").animate({
-                            left: 0
+                else {
+                    $(".menuitem").css("background-color", $("#menu").css('background-color'));
+                    $("#" + selected).css("background-color", "#F9F9F9");
+                    $("#submenuconfig").slideUp("slow", "swing");
+                    if ($(window).width() <= 768) {
+                        $("#menu").animate({
+                            left: -$("#menu").outerWidth()
                         }, "slow", "swing");
+                            $("#menubutton").show();
+                    }
+                    $("#content").animate({
+                        left: -$("#content").outerWidth()
+                    }, "slow", "swing", function() {
+                        switch (selected) {
+                            case ('newpass'):
+                                var page = 'user.php?type=newpass';
+                                break;
+                            case ('newlang'):
+                                var page = 'user.php?type=newlang';
+                                break;
+                            case ('newuser'):
+                                var page = 'config.php?type=newuser';
+                                break;
+                            case ('newcat'):
+                                var page = 'config.php?type=newcat';
+                                break;
+                            case ('newaccount'):
+                                var page = 'config.php?type=newaccount';
+                                break;
+                            case ('logout'):
+                                var page = 'user.php?logout=true';
+                                break;
+                            default:
+                                var page = selected + '.php';
+                                break;
+                        }
+                        $.get(page, function(data, status){
+                            if (status === "success") {
+                                $("#content").html(data);
+                            }
+                            else {
+                                $("#content").html("Error: " + status);
+                            }
+                            $("#content").animate({
+                                left: 0
+                            }, "slow", "swing");
+                        });
                     });
-                });
-                event.stopPropagation();
+                    event.stopPropagation();
+                }
             });
-            
         });
         </script>
     </head>
@@ -166,20 +184,20 @@ if (strpos($url,'index.php') !== false) {
         if ($_SESSION['auth']) {
 ?>
             <img src="iconos/ic_menu_black_48dp.png" alt="menu" id="menubutton">
-            <div id="menu" align="center">
+            <div id="menu">
                 <div id="topmenu" style="border-bottom: 1px solid;"></div>
                 <div class="menuitem" id="recap"><?php echo $recap_text; ?></div>
-                <div class="menusep">|</div>
                 <div class="menuitem" id="activities"><?php echo $activities_text; ?></div>
-                <div class="menusep">|</div>
                 <div class="menuitem" id="common"><?php echo $commonexpenses_text; ?></div>
-                <div class="menusep">|</div>
                 <div class="menuitem" id="newact"><?php echo $newact_text; ?></div>
-                <div class="menusep">|</div>
-                <div class="menuitem" id="newpass"><?php echo $changepass_text; ?></div>
-                <div class="menusep">|</div>
                 <div class="menuitem" id="config"><?php echo $config_text; ?></div>
-                <div class="menusep">|</div>
+                <div id="submenuconfig" style="display:none;">
+                    <div class="menuitem" id="newpass">&ensp;&ensp;<?php echo $changepass_text; ?></div>
+                    <div class="menuitem" id="newlang">&ensp;&ensp;<?php echo $changelang_text; ?></div>
+                    <div class="menuitem" id="newuser">&ensp;&ensp;<?php echo $newuser_text; ?></div>
+                    <div class="menuitem" id="newcat">&ensp;&ensp;<?php echo $newcat_text; ?></div>
+                    <div class="menuitem" id="newaccount">&ensp;&ensp;<?php echo $newaccount_text; ?></div>
+                </div>
                 <div class="menuitem" id="logout"><?php echo $logout_text; ?></div>
                 <div id="copyright" align="right" style="position:absolute; bottom:0"><a href="LICENSE">Copyright (C) 2015  bercianor</a></div>
             </div>

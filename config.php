@@ -16,30 +16,72 @@
 -->
 <?php include 'db.con.php'; ?>
 <div id="title"><?php echo $config_text; ?></div>
-<br>
-<div class="submenu" align="center">
-    <div class="submenuitem" id="newuser"><?php echo $newuser_text; ?></div>
-    <div class="submenusep">|</div>
-    <div class="submenuitem" id="newcat"><?php echo $newcat_text; ?></div>
-    <div class="submenusep">|</div>
-    <div class="submenuitem" id="newaccount"><?php echo $newaccount_text; ?></div>
-</div>
-<br>
-<script>
-    $(".submenuitem").click(function(){
-        var e = event.target.id;
-        $("#configcontent").slideUp("slow", function(){
-            $("#configcontent").html("");
-            $.get("config_ajax.php?type=" + e, function(data, status){
-                if (status === "success") {
-                    $("#configcontent").html(data);
-                    $("#configcontent").slideDown("slow");
-                }
-                else {
-                    $("#configcontent").html("Error: " + status);
-                }
-            });
-        });
-    });
-</script>
-<div id="configcontent" style="position:relative; z-index: 0"></div>
+<?php
+if ($_GET['type'] == 'newuser') {
+?>
+    <div class="subtitle"><?php echo $newuser_text; ?></div>
+    <br>
+    <form action="ops.php" method="post"><table class="form" align="center" border='0'>
+        <tr>
+            <td align="right"><?php echo $user_text; ?>:</td><td><input type="text" class="formelem" name="newuser" placeholder="<?php echo $user_text; ?>"></td>
+        </tr>
+        <tr>
+            <td align="right"><?php echo $password_text; ?>:</td><td><input type="password" class="formelem" name="newuserpass" placeholder="<?php echo $password_text; ?>"></td>
+        </tr>
+        <tr>
+            <td align="right"><?php echo $repeatpassword_text; ?>:</td><td><input type="password" class="formelem" name="newuserreppass" placeholder="<?php echo $repeatpassword_text; ?>"></td>
+        </tr>
+        <tr>
+            <td align="right"><?php echo $lang_text; ?>:</td><td><select class="formelem" name="newuserlang">
+                <option value="" selected><?php echo $selectlang_text; ?>:</option>
+<?php
+                    foreach ($languages['languages'] as $value => $text) {
+                        echo '<option value="'.$value.'">'.$text.'</option>';
+                    }
+?>
+            </select></td>
+        </tr>
+        <tr>
+            <td></td><td><input type="submit" class="formelem" name="newuserb" value="<?php echo $send_text; ?>"></td>
+        </tr>
+    </table></form>
+<?php
+}
+else if ($_GET['type'] == 'newcat') {
+?>
+    <div class="subtitle"><?php echo $addcat_text; ?></div>
+    <br>
+    <form action="ops.php" method="post"><table class="form" align="center" border='0'>
+        <tr>
+            <td align="right"><?php echo $catname_text; ?>:</td><td><input type="text" class="formelem" name="category" placeholder="<?php echo $catname_text; ?>"></td>
+        </tr>
+        <tr>
+            <td></td><td><input type="submit" class="formelem" name="newcat" value="<?php echo $send_text; ?>"></td>
+        </tr>
+    </table></form>
+<?php
+}
+else if ($_GET['type'] == 'newaccount') {
+?>
+    <div class="subtitle"><?php echo $addaccount_text; ?></div>
+    <br>
+    <form action="ops.php" method="post"><table class="form" align="center" border='0'>
+        <tr>
+            <td align="right"><?php echo $accountname_text; ?>:</td><td><input type="text" class="formelem" name="account" placeholder="<?php echo $accountname_text; ?>"></td>
+        </tr>
+        <tr>
+            <td align="right"><?php echo $initialbalance_text; ?>:</td><td><input type="number" class="formelem" name="balance" placeholder="<?php echo $initialbalancedesc_text; ?>"></td>
+        </tr>
+        <tr>
+            <td align="right"><?php echo $commonaccount_text; ?></td><td><input type="checkbox" class="formelem" name="common"></td>
+        </tr>
+        <tr>
+            <td></td><td><input type="submit" class="formelem" name="newaccount" value="<?php echo $send_text; ?>"></td>
+        </tr>
+    </table></form>
+<?php
+}
+else {
+    echo "";
+}
+?>

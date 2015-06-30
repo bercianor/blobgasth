@@ -16,7 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 session_start();
-include ((is_null($row['user'])) ? 'es_ES' : $_SESSION['lang']).'.php';
+include ((empty($row['user'])) ? 'es_ES' : $_SESSION['lang']).'.php';
 function test_input($data) {
     $data = trim($data);
     $data = stripslashes($data);
@@ -48,11 +48,23 @@ function arr2ini(array $a, array $parent = array()) {
 }
 
 $configfile = 'db_settings.ini';
+$langfile = 'languages.ini';
 $tablecat = "categories";
 $tableaccounts = "accounts";
 $tableact = "activities";
 $tabletrans = "transfers";
 $tableuser = "users";
+
+if (!$languages = parse_ini_file($langfile, TRUE)) {
+    $languages = [
+        'languages' => [
+            'es_ES' => 'Espa&ntilde;ol (Espa&ntilde;a)'
+        ]
+    ];
+    $inifile = fopen($langfile, "w");
+    fwrite($inifile, arr2ini($languages));
+    fclose($inifile);
+}
 
 if (!$settings = parse_ini_file($configfile, TRUE)) {
     $settings = [

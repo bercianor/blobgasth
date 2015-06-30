@@ -52,13 +52,10 @@ and (min-device-width: 769px) {
         border: 1px solid;
     }
     div.menuitem {
-        background-color: #EEEEEE;
         display: block;
+        padding-left: 1em;
         border-bottom: 1px solid;
         line-height : 300%;
-    }
-    div.menusep {
-        display: none;
     }
     
     /*Contenido global (cabecera y contenido)*/
@@ -132,14 +129,6 @@ and (min-device-width: 769px) {
         margin-right: 5%;
         display: inline-block;
     }
-    
-    /*Submenú*/
-    div.submenuitem {
-        display: inline-block;
-    }
-    div.submenusep {
-        display: inline-block;
-    }
 }
 @media only screen
 and (max-device-width : 768px) {
@@ -178,10 +167,10 @@ and (max-device-width : 768px) {
         border: 1px solid;
     }
     div.menuitem {
-        background-color: #EEEEEE;
         display: block;
+        padding-left: 1em;
         border-bottom: 1px solid;
-        line-height : 300%;
+        line-height : 200%;
     }
     div.menusep {
         display: none;
@@ -257,14 +246,6 @@ and (max-device-width : 768px) {
     div.recap {
         margin-left: 5%;
         margin-right: 5%;
-        display: inline-block;
-    }
-    
-    /*Submenú*/
-    div.submenuitem {
-        display: inline-block;
-    }
-    div.submenusep {
         display: inline-block;
     }
 }

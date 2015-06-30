@@ -32,6 +32,7 @@
     $category_text              = 'Categoría';
     $categoryexpenses_text      = 'Gastos por Categoría';
     $catname_text               = 'Nombre de la categoría';
+    $changelang_text            = 'Cambiar idioma';
     $changepass_text            = 'Cambiar contraseña';
     $common_text                = '¿Común?';
     $commonaccount_text         = '¿Cuenta Común?';
@@ -50,6 +51,7 @@
     $incomesexpenses_text       = 'Ingresos/Gastos';
     $initialbalance_text        = 'Balance inicial';
     $initialbalancedesc_text    = 'Balance inicial de la cuenta';
+    $lang_text                  = 'Idioma';
     $logout_text                = 'Cerrar Sesión';
     $money_symbol               = '€';
     $months                     = array(
@@ -69,6 +71,7 @@
     $newaccount_text            = 'Nueva cuenta';
     $newact_text                = 'Nuevo movimiento';
     $newcat_text                = 'Nueva categoria';
+    $newlang_text               = 'Nuevo idioma';
     $newpass_text               = 'Nueva contraseña';
     $newtransf_text             = 'Nueva transferencia';
     $newuser_text               = 'Nuevo Usuario';
@@ -83,6 +86,7 @@
     $repeatpassword_text        = 'Repite la Contraseña';
     $selectaccount_text         = 'Selecciona una cuenta';
     $selectcat_text             = 'Selecciona una categoría';
+    $selectlang_text            = 'Selecciona un idioma';
     $selectuser_text            = 'Selecciona un usuario';
     $send_text                  = 'Enviar';
     $timezone                   = 'Europe/Madrid';

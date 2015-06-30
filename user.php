@@ -14,9 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php include 'db.con.php'; ?>
-
 <?php
 try {
     if (isset($_GET['logout'])) {
@@ -68,6 +66,24 @@ try {
                 <td align="right"><?php echo $repeatpassword_text; ?>:</td><td><input type="password" class="formelem" name="reppass" placeholder="<?php echo $repeatpassword_text; ?>"></td>
             </tr>
             <tr><td></td><td><input type="submit" name="newpassb" class="formelem" value="<?php echo $send_text; ?>"></td></tr>
+        </table></form>
+<?php
+    }
+    else if ($_GET['type'] == 'newlang') {
+?>
+        <div id="title"><?php echo $changelang_text; ?></div>
+        <form action="ops.php" method="post"><table class="form" align="center" border='0'>
+            <tr>
+                <td align="right"><?php echo $newlang_text; ?>:</td><td><select class="formelem" name="newlang">
+                    <option value="" selected><?php echo $selectlang_text; ?>:</option>
+<?php
+                    foreach ($languages['languages'] as $value => $text) {
+                        echo '<option value="'.$value.'"'.(($value == $_SESSION['lang']) ? 'selected' : '').'>'.$text.'</option>';
+                    }
+?>
+                </select></td>
+            </tr>
+            <tr><td></td><td><input type="submit" name="newlangb" class="formelem" value="<?php echo $send_text; ?>"></td></tr>
         </table></form>
 <?php
     }
