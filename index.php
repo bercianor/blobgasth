@@ -65,10 +65,10 @@ if (strpos($url,'index.php') !== false) {
         <link rel="shortcut icon" sizes="192x192" href="iconos/launcher-icon-4x.png">
         <!-- https://developer.chrome.com/multidevice/android/installtohomescreen -->
         
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js">$.noConflict();</script>
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js">$.noConflict();</script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
         <script>
-        jQuery(document).ready(function($){
+        jQuery(document).ready(function(event){
             $(window).width() <= 768 ? $("#menu").css('left', -$("#menu").outerWidth()) : false
             $("#topmenu").css('height', $("#logo").outerHeight()/2);
             $("#all").css('left', $(window).width() <= 768 ? 0 : $("#menu").outerWidth());
@@ -91,7 +91,7 @@ if (strpos($url,'index.php') !== false) {
                 $("#" + selected).css("background-color", "#F9F9F9");
             });
             
-            $("#menubutton").click(function(){
+            $("#menubutton").click(function(event){
                 $("#menu").animate({
                     left: parseInt($("#menu").css('left'),10) == 0 ? -$("#menu").outerWidth() : 0
                 }, "slow", "swing");
@@ -99,7 +99,7 @@ if (strpos($url,'index.php') !== false) {
                 event.stopPropagation();
             });
             if ($(window).width() <= 768) {
-                $("html").click(function(){
+                $("html").click(function(event){
                     $("#menu").animate({
                         left: -$("#menu").outerWidth()
                     }, "slow", "swing");
@@ -107,7 +107,7 @@ if (strpos($url,'index.php') !== false) {
                 });
             }
             
-            $(window).resize(function() {
+            $(window).resize(function(event) {
                 if ($(window).width() <= 768) {
                     $("#menu").hide();
                     $("#menubutton").show();
@@ -118,7 +118,7 @@ if (strpos($url,'index.php') !== false) {
                 }
             });
             
-            $(".menuitem").click(function(){
+            $(".menuitem").click(function(event){
                 selected = event.target.id;
                 if (selected === "config"){
                     $("#submenuconfig").slideToggle("slow", "swing");
@@ -136,7 +136,7 @@ if (strpos($url,'index.php') !== false) {
                     }
                     $("#content").animate({
                         left: -$("#content").outerWidth()
-                    }, "slow", "swing", function() {
+                    }, "slow", "swing", function(event) {
                         switch (selected) {
                             case ('newpass'):
                                 var page = 'user.php?type=newpass';
@@ -199,7 +199,7 @@ if (strpos($url,'index.php') !== false) {
                     <div class="menuitem" id="newaccount">&ensp;&ensp;<?php echo $newaccount_text; ?></div>
                 </div>
                 <div class="menuitem" id="logout"><?php echo $logout_text; ?></div>
-                <div id="copyright" align="right" style="position:absolute; bottom:0"><a href="LICENSE">Copyright (C) 2015  bercianor</a></div>
+                <div id="copyright" align="right" style="position:absolute; bottom:0"><a href="LICENSE">Copyright (C) 2019  bercianor</a></div>
             </div>
             <div id="all">
                 <div id="logo">Blobgasth</div>

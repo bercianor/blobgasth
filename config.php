@@ -70,7 +70,7 @@ else if ($_GET['type'] == 'newaccount') {
             <td align="right"><?php echo $accountname_text; ?>:</td><td><input type="text" class="formelem" name="account" placeholder="<?php echo $accountname_text; ?>" required></td>
         </tr>
         <tr>
-            <td align="right"><?php echo $initialbalance_text; ?>:</td><td><input type="number" class="formelem" name="balance" placeholder="<?php echo $initialbalancedesc_text; ?>" required></td>
+            <td align="right"><?php echo $initialbalance_text; ?>:</td><td><input type="number" step="0.01" class="formelem" name="balance" placeholder="<?php echo $initialbalancedesc_text; ?>" required></td>
         </tr>
         <tr>
             <td align="right"><?php echo $commonaccount_text; ?></td><td><input type="checkbox" class="formelem" name="common"></td>
